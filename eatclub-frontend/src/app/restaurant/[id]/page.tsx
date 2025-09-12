@@ -2,8 +2,9 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useRestaurantsViewModel } from '@/viewmodels/useRestaurantsViewModel';
-import { FiArrowLeft, FiHeart, FiMapPin, FiPhone, FiBookOpen } from 'react-icons/fi';
+import { BsChevronLeft, BsHeart, BsGeoAlt, BsTelephone, BsJournal, BsSliders } from 'react-icons/bs';
 
 export default function RestaurantDetailPage() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ export default function RestaurantDetailPage() {
             onClick={() => router.back()}
             className="bg-blue-500 text-white px-4 py-2 rounded flex items-center mx-auto"
           >
-            <FiArrowLeft className="mr-2" />
+            <BsChevronLeft className="mr-2" />
             Go Back
           </button>
         </div>
@@ -40,13 +41,23 @@ export default function RestaurantDetailPage() {
       <header className="flex items-center p-4 bg-white shadow-sm sticky top-0 z-10">
         <button 
           onClick={() => router.back()}
-          className="text-blue-500 flex items-center"
+          className="text-gray-600 flex items-center font-medium"
         >
-          <FiArrowLeft className="text-xl mr-1" />
+          <BsChevronLeft className="text-xl mr-1" />
           Back
         </button>
-        <h1 className="flex-1 text-center font-semibold">Restaurant Details</h1>
-        <div className="w-6"></div> {/* Spacer for balance */}
+        <div className="flex-1 flex justify-center">
+          <Image 
+            src="/logo.png" 
+            alt="EatClub Logo" 
+            width={190} 
+            height={100}
+            className="h-8 w-auto"
+          />
+        </div>
+        <button className="p-2 rounded-full hover:bg-gray-100" aria-label="filters">
+          <BsSliders className="text-xl text-gray-600" />
+        </button>
       </header>
 
       {/* Restaurant image */}
@@ -75,19 +86,19 @@ export default function RestaurantDetailPage() {
         {/* Action buttons */}
         <div className="flex justify-between mt-6 pt-4 border-t border-gray-100">
           <button className="flex flex-col items-center text-gray-600">
-            <FiBookOpen className="text-xl mb-1" />
+            <BsJournal className="text-xl mb-1" />
             <span className="text-xs">Menu</span>
           </button>
           <button className="flex flex-col items-center text-gray-600">
-            <FiPhone className="text-xl mb-1" />
+            <BsTelephone className="text-xl mb-1" />
             <span className="text-xs">Call us</span>
           </button>
           <button className="flex flex-col items-center text-gray-600">
-            <FiMapPin className="text-xl mb-1" />
+            <BsGeoAlt className="text-xl mb-1" />
             <span className="text-xs">Location</span>
           </button>
           <button className="flex flex-col items-center text-gray-600">
-            <FiHeart className="text-xl mb-1" />
+            <BsHeart className="text-xl mb-1" />
             <span className="text-xs">Favourite</span>
           </button>
         </div>

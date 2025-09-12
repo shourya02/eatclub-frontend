@@ -5,8 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRestaurantsViewModel } from '@/viewmodels/useRestaurantsViewModel';
 import RestaurantCard from '@/components/RestaurantCard';
-import { FiUser, FiSettings, FiSearch } from 'react-icons/fi';
-import { FaUtensils } from 'react-icons/fa';
+import { BsPerson, BsSliders, BsSearch } from 'react-icons/bs';
 
 export default function HomePage() {
   const { 
@@ -42,7 +41,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="flex items-center justify-between px-4 py-3 bg-white shadow-sm sticky top-0 z-10">
         <button className="p-2 rounded-full hover:bg-gray-100" aria-label="profile">
-          <FiUser className="text-xl text-gray-600" />
+          <BsPerson className="text-xl text-gray-600" />
         </button>
         <div className="flex items-center">
           <Image 
@@ -54,7 +53,7 @@ export default function HomePage() {
           />
         </div>
         <button className="p-2 rounded-full hover:bg-gray-100" aria-label="filters">
-          <FiSettings className="text-xl text-gray-600" />
+          <BsSliders className="text-xl text-gray-600" />
         </button>
       </header>
 
@@ -68,7 +67,7 @@ export default function HomePage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-full border rounded-full p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 pl-10"
           />
-          <FiSearch className="absolute left-3 top-3.5 text-gray-400" />
+          <BsSearch className="absolute left-3 top-3.5 text-gray-400" />
         </div>
       </div>
 
