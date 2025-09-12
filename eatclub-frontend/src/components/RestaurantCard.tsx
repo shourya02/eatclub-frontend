@@ -2,13 +2,12 @@
 
 import React from 'react';
 import { Restaurant } from '@/models/restaurant';
-import { BsHeart } from 'react-icons/bs';
+import { BsHeart, BsLightningChargeFill } from 'react-icons/bs';
 
 type Props = { restaurant: Restaurant; };
 
 export default function RestaurantCard({ restaurant }: Props) {
   const deals = restaurant.deals || [];
-  const hasNewDeal = deals.some(d => d.lightning === 'true');
   
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
@@ -40,25 +39,20 @@ export default function RestaurantCard({ restaurant }: Props) {
                 timeRange = `${deal.open} - ${deal.end}`;
               }
 
-
-
-                const dealType = deal.dineIn === 'true' ? 'Dine-in' : 'Takeaway';
+              const dealType = deal.dineIn === 'true' ? 'Dine-in' : 'Takeaway';
+              const isLightningDeal = deal.lightning === 'true';
               
               return (
                 <div key={index} className="bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded">
-                  {deal.discount}% off - {dealType}
-                  <br />
+                  <div className="flex items-center  ">
+                    {isLightningDeal && <BsLightningChargeFill className="text-yellow-300 mr-1" />}
+                    {deal.discount}% off - {dealType}
+                  </div>
+                  
                   <span className="font-normal">{timeRange}</span>
                 </div>
               );
             })}
-          </div>
-        )}
-        
-        {/* "New" badge */}
-        {hasNewDeal && (
-          <div className="absolute right-3 top-3 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded">
-            New
           </div>
         )}
       </div>
