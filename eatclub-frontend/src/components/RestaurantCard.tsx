@@ -10,6 +10,9 @@ export default function RestaurantCard({ restaurant }: Props) {
   const deals = [...(restaurant.deals || [])].sort((a, b) => {
     return (+b.discount || 0) - (+a.discount || 0);
   });
+
+  const hasDineInDeal = deals.some(deal => deal.dineIn === 'true');
+  const hasTakeawayDeal = deals.some(deal => deal.dineIn !== 'true'); // If dineIn is not true, it's takeaway
   
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
@@ -78,10 +81,13 @@ export default function RestaurantCard({ restaurant }: Props) {
         </div>
 
         {/* Service tags */}
-        <div className="mt-3 flex flex-wrap gap-2 text-xs text-gray-600">
-          <span className="px-2 py-1 border border-gray-200 rounded-full">Dine In</span>
-          <span className="px-2 py-1 border border-gray-200 rounded-full">Takeaway</span>
-          <span className="px-2 py-1 border border-gray-200 rounded-full">Order Online</span>
+         <div className="mt-3 flex flex-wrap gap-2 text-xs text-gray-600">
+          {hasDineInDeal && (
+            <span className="px-2 py-1 border border-gray-200 rounded-full">Dine In</span>
+          )}
+          {hasTakeawayDeal && (
+            <span className="px-2 py-1 border border-gray-200 rounded-full">Takeaway</span>
+          )}
         </div>
       </div>
     </div>
