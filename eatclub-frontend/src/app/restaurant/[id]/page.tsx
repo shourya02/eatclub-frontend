@@ -3,6 +3,7 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useRestaurantsViewModel } from '@/viewmodels/useRestaurantsViewModel';
+import { FiArrowLeft, FiHeart, FiMapPin, FiPhone, FiBookOpen } from 'react-icons/fi';
 
 export default function RestaurantDetailPage() {
   const { id } = useParams();
@@ -18,8 +19,9 @@ export default function RestaurantDetailPage() {
           <div className="text-2xl font-bold mb-2">Restaurant Not Found</div>
           <button 
             onClick={() => router.back()}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-blue-500 text-white px-4 py-2 rounded flex items-center mx-auto"
           >
+            <FiArrowLeft className="mr-2" />
             Go Back
           </button>
         </div>
@@ -40,7 +42,7 @@ export default function RestaurantDetailPage() {
           onClick={() => router.back()}
           className="text-blue-500 flex items-center"
         >
-          <span className="text-xl mr-1">&larr;</span>
+          <FiArrowLeft className="text-xl mr-1" />
           Back
         </button>
         <h1 className="flex-1 text-center font-semibold">Restaurant Details</h1>
@@ -50,11 +52,11 @@ export default function RestaurantDetailPage() {
       {/* Restaurant image */}
       <div className="relative">
         <img
-          src={restaurant.imageLink || 'https://via.placeholder.com/400x200?text=No+Image'}
+          src={restaurant.imageLink || 'https://placehold.co/600x400?text=Image+Coming+Soon&font=roboto'}
           alt={restaurant.name}
           className="w-full h-48 object-cover"
           onError={(e) => {
-            e.currentTarget.src = 'https://via.placeholder.com/400x200?text=No+Image';
+            e.currentTarget.src = 'https://placehold.co/600x400?text=Image+Coming+Soon&font=roboto';
           }}
         />
       </div>
@@ -73,19 +75,19 @@ export default function RestaurantDetailPage() {
         {/* Action buttons */}
         <div className="flex justify-between mt-6 pt-4 border-t border-gray-100">
           <button className="flex flex-col items-center text-gray-600">
-            <span className="text-xl mb-1">📋</span>
+            <FiBookOpen className="text-xl mb-1" />
             <span className="text-xs">Menu</span>
           </button>
           <button className="flex flex-col items-center text-gray-600">
-            <span className="text-xl mb-1">📞</span>
+            <FiPhone className="text-xl mb-1" />
             <span className="text-xs">Call us</span>
           </button>
           <button className="flex flex-col items-center text-gray-600">
-            <span className="text-xl mb-1">📍</span>
+            <FiMapPin className="text-xl mb-1" />
             <span className="text-xs">Location</span>
           </button>
           <button className="flex flex-col items-center text-gray-600">
-            <span className="text-xl mb-1">❤️</span>
+            <FiHeart className="text-xl mb-1" />
             <span className="text-xs">Favourite</span>
           </button>
         </div>

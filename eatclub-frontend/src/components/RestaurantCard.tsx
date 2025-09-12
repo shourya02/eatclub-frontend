@@ -14,12 +14,12 @@ export default function RestaurantCard({ restaurant }: Props) {
     <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
       <div className="relative">
         <img
-          src={restaurant.imageLink || 'https://via.placeholder.com/400x200?text=No+Image'}
+          src={restaurant.imageLink || 'https://placehold.co/600x400?text=Image+Coming+Soon&font=roboto'}
           alt={restaurant.name}
           className="w-full h-44 object-cover"
           loading="lazy"
           onError={(e) => {
-            e.currentTarget.src = 'https://via.placeholder.com/400x200?text=No+Image';
+            e.currentTarget.src = 'https://placehold.co/600x400?text=Image+Coming+Soon&font=roboto';
           }}
         />
         

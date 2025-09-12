@@ -4,7 +4,8 @@
 import Link from 'next/link';
 import { useRestaurantsViewModel } from '@/viewmodels/useRestaurantsViewModel';
 import RestaurantCard from '@/components/RestaurantCard';
-import SearchFilter from '@/components/SearchFilter';
+import { FiUser, FiSettings, FiSearch } from 'react-icons/fi';
+import { FaUtensils } from 'react-icons/fa';
 
 export default function HomePage() {
   const { 
@@ -39,9 +40,16 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50 pb-16">
       {/* Header */}
       <header className="flex items-center justify-between px-4 py-3 bg-white shadow-sm sticky top-0 z-10">
-        <button className="p-2 rounded-full" aria-label="profile">👤</button>
-        <div className="text-xl font-bold">🍽️ EatClub</div>
-        <button className="p-2 rounded-full" aria-label="filters">⚙️</button>
+        <button className="p-2 rounded-full hover:bg-gray-100" aria-label="profile">
+          <FiUser className="text-xl text-gray-600" />
+        </button>
+        <div className="flex items-center text-xl font-bold text-red-600">
+          <FaUtensils className="mr-2" />
+          EatClub
+        </div>
+        <button className="p-2 rounded-full hover:bg-gray-100" aria-label="filters">
+          <FiSettings className="text-xl text-gray-600" />
+        </button>
       </header>
 
       {/* Search and filter section */}
@@ -54,7 +62,7 @@ export default function HomePage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-full border rounded-full p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 pl-10"
           />
-          <span className="absolute left-3 top-3 text-gray-400">🔍</span>
+          <FiSearch className="absolute left-3 top-3.5 text-gray-400" />
         </div>
       </div>
 
