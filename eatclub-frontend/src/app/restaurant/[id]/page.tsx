@@ -1,10 +1,10 @@
-// src/app/restaurant/[id]/page.tsx
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useRestaurantsViewModel } from '@/viewmodels/useRestaurantsViewModel';
 import { BsChevronLeft, BsHeart, BsGeoAlt, BsTelephone, BsJournal, BsSliders } from 'react-icons/bs';
+import DealCard from '@/components/DealCard';
 
 export default function RestaurantDetailPage() {
   const { id } = useParams();
@@ -129,29 +129,7 @@ export default function RestaurantDetailPage() {
         ) : (
           <div className="space-y-3">
             {sortedDeals.map(deal => (
-              <div key={deal.objectId} className="border border-gray-200 rounded-lg p-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <div className="flex items-center">
-                      <span className="text-red-600 font-bold text-lg">{deal.discount}% Off</span>
-                      {deal.lightning === 'true' && (
-                        <span className="bg-green-100 text-green-800 text-xs font-medium ml-2 px-2 py-0.5 rounded">
-                          New
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-gray-600 text-sm mt-1">
-                      {deal.dineIn === 'true' ? 'Dine In' : 'Takeaway'} • {deal.start && deal.end ? `${deal.start} - ${deal.end}` : 'Anytime today'}
-                    </p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      Qty left: {deal.qtyLeft || '5'} Deals Left
-                    </p>
-                  </div>
-                  <button className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                    Redeem
-                  </button>
-                </div>
-              </div>
+              <DealCard key={deal.objectId} deal={deal} />
             ))}
           </div>
         )}
