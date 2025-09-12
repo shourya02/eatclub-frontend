@@ -1,0 +1,139 @@
+'use client';
+
+import { useParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { useRestaurantsViewModel } from '@/viewmodels/useRestaurantsViewModel';
+import { BsChevronLeft, BsHeart, BsGeoAlt, BsTelephone, BsJournal, BsSliders } from 'react-icons/bs';
+import DealCard from '@/components/DealCard';
+
+export default function RestaurantDetailPage() {
+  const { id } = useParams();
+  const router = useRouter();
+  const { restaurants } = useRestaurantsViewModel();
+
+  const restaurant = restaurants.find(r => r.objectId === id);
+
+  if (!restaurant) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-2xl font-bold mb-2">Restaurant Not Found</div>
+          <button 
+            onClick={() => router.back()}
+            className="bg-blue-500 text-white px-4 py-2 rounded flex items-center mx-auto"
+          >
+            <BsChevronLeft className="mr-2" />
+            Go Back
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Sort deals by highest discount
+  const sortedDeals = [...restaurant.deals].sort((a, b) => {
+    return (+b.discount || 0) - (+a.discount || 0);
+  });
+
+  return (
+    <div className="min-h-screen bg-gray-50 pb-16">
+      {/* Header with back button */}
+      <header className="flex items-center p-4 bg-white shadow-sm sticky top-0 z-10">
+        <button 
+          onClick={() => router.back()}
+          className="text-gray-600 flex items-center font-medium"
+        >
+          <BsChevronLeft className="text-xl mr-1" />
+          Back
+        </button>
+        <div className="flex-1 flex justify-center">
+          <Image 
+            src="/logo.png" 
+            alt="EatClub Logo" 
+            width={190} 
+            height={100}
+            className="h-8 w-auto"
+          />
+        </div>
+        <button className="p-2 rounded-full hover:bg-gray-100" aria-label="filters">
+          <BsSliders className="text-xl text-gray-600" />
+        </button>
+      </header>
+
+      {/* Restaurant image */}
+      <div className="relative">
+        <img
+          src={restaurant.imageLink || 'https://placehold.co/600x400?text=Image+Coming+Soon&font=roboto'}
+          alt={restaurant.name}
+          className="w-full h-48 object-cover"
+          onError={(e) => {
+            e.currentTarget.src = 'https://placehold.co/600x400?text=Image+Coming+Soon&font=roboto';
+          }}
+        />
+      </div>
+
+      {/* Restaurant info */}
+      <div className="p-4 bg-white">
+        <h2 className="text-2xl font-bold text-black mb-1">{restaurant.name}</h2>
+        <p className="text-gray-600 mb-2">
+          {restaurant.cuisines?.join(' • ') || 'Various cuisines'}
+        </p>
+        
+        <p className="text-gray-500">
+          {restaurant.distance || '0.5 km away'}, {restaurant.suburb || 'Lower East'}
+        </p>
+        
+        {/* Action buttons */}
+        <div className="flex justify-between mt-6 pt-4 border-t border-gray-100">
+          <button className="flex flex-col items-center text-gray-600">
+            <BsJournal className="text-xl mb-1" />
+            <span className="text-xs">Menu</span>
+          </button>
+          <button className="flex flex-col items-center text-gray-600">
+            <BsTelephone className="text-xl mb-1" />
+            <span className="text-xs">Call us</span>
+          </button>
+          <button className="flex flex-col items-center text-gray-600">
+            <BsGeoAlt className="text-xl mb-1" />
+            <span className="text-xs">Location</span>
+          </button>
+          <button className="flex flex-col items-center text-gray-600">
+            <BsHeart className="text-xl mb-1" />
+            <span className="text-xs">Favourite</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Additional info */}
+      <div className="p-4 bg-white mt-2">
+        <h3 className="font-semibold text-gray-800 mb-2">Details</h3>
+        <p className="text-gray-600 text-sm">
+          {restaurant.cuisines?.join(' • ')} • {restaurant.priceRange || '$$'}
+        </p>
+        <p className="text-gray-600 text-sm mt-1">
+          Hours: {restaurant.open || '12:00PM'} - {restaurant.close || '11:00PM'}
+        </p>
+        <p className="text-gray-600 text-sm mt-1">
+          {restaurant.address1} • {restaurant.distance || '1.0km'} Away
+        </p>
+      </div>
+
+      {/* Deals section */}
+      <div className="p-4 bg-white mt-2">
+        <h3 className="font-semibold text-lg text-gray-800 mb-3">Available Deals</h3>
+        
+        {sortedDeals.length === 0 ? (
+          <div className="text-center py-6 text-gray-500">
+            No deals available at this time.
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {sortedDeals.map(deal => (
+              <DealCard key={deal.objectId} deal={deal} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

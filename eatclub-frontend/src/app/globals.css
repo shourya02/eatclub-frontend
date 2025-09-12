@@ -5,6 +5,12 @@
   --foreground: #171717;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

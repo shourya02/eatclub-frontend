@@ -20,4 +20,6 @@ export interface Restaurant {
   open?: string;
   close?: string;
   deals: Deal[];
+  distance?: string; 
+  priceRange?: string;
 }
