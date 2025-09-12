@@ -7,7 +7,9 @@ import { BsHeart, BsLightningChargeFill } from 'react-icons/bs';
 type Props = { restaurant: Restaurant; };
 
 export default function RestaurantCard({ restaurant }: Props) {
-  const deals = restaurant.deals || [];
+  const deals = [...(restaurant.deals || [])].sort((a, b) => {
+    return (+b.discount || 0) - (+a.discount || 0);
+  });
   
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
@@ -62,7 +64,7 @@ export default function RestaurantCard({ restaurant }: Props) {
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-black">{restaurant.name}</h3>
             <p className="text-sm text-gray-500 mt-1">
-              {restaurant.distance || '0.5km Away'}, {restaurant.suburb || 'Lower East'}
+              {restaurant.distance || '0.5 km Away'}, {restaurant.suburb || 'Lower East'}
             </p>
             <p className="text-sm text-gray-600 mt-2">
               {(restaurant.cuisines || ['Italian', 'Pizza']).join(', ')}
