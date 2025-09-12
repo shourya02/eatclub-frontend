@@ -65,9 +65,9 @@ export default function HomePage() {
             placeholder="e.g. chinese, pizza"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full border rounded-full p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 pl-10"
+            className="w-full border rounded-full p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 pl-10 text-gray-800"
           />
-          <BsSearch className="absolute left-3 top-3.5 text-gray-400" />
+          <BsSearch className="absolute left-3 top-3.5 text-gray-600" />
         </div>
       </div>
 

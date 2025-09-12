@@ -14,7 +14,6 @@ export default function RestaurantCard({ restaurant }: Props) {
   // Determine which service tags to show based on deals
   const hasDineInDeal = deals.some(deal => deal.dineIn === 'true');
   const hasTakeawayDeal = deals.some(deal => deal.dineIn !== 'true');
-  const hasOrderOnline = true;
 
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
@@ -89,9 +88,6 @@ export default function RestaurantCard({ restaurant }: Props) {
           )}
           {hasTakeawayDeal && (
             <span className="px-2 py-1 border border-gray-200 rounded-full">Takeaway</span>
-          )}
-          {hasOrderOnline && (
-            <span className="px-2 py-1 border border-gray-200 rounded-full">Order Online</span>
           )}
         </div>
       </div>
