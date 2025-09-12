@@ -48,7 +48,7 @@ export default function RestaurantCard({ restaurant }: Props) {
               const isLightningDeal = deal.lightning === 'true';
               
               return (
-                <div key={index} className="bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded">
+                <div key={index} className="text-white text-xs font-semibold px-2 py-1 rounded"style={{ backgroundColor: '#ed4c2e' }}>
                   <div className="flex items-center  ">
                     {isLightningDeal && <BsLightningChargeFill className="text-yellow-300 mr-1" />}
                     {deal.discount}% off - {dealType}

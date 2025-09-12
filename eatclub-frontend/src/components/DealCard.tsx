@@ -32,10 +32,10 @@ export default function DealCard({ deal }: Props) {
             {isLightningDeal ? (
               <div className="flex items-center">
                 <BsLightningChargeFill className="text-yellow-500 mr-1" />
-                <span className="text-red-600 font-bold text-lg">{deal.discount}% Off</span>
+                <span className="text-[#ed4c2e] font-bold text-lg">{deal.discount}% Off</span>
               </div>
             ) : (
-              <span className="text-red-600 font-bold text-lg">{deal.discount}% Off</span>
+              <span className="text-[#ed4c2e] font-bold text-lg">{deal.discount}% Off</span>
             )}
           </div>
           <p className="text-gray-600 text-sm mt-1">
@@ -45,7 +45,7 @@ export default function DealCard({ deal }: Props) {
             Qty left: {deal.qtyLeft || '5'} Deals Left
           </p>
         </div>
-        <button className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+        <button className="text-white px-4 py-2 rounded-lg text-sm font-medium" style={{ backgroundColor: '#ed4c2e' }}>
           Redeem
         </button>
       </div>
