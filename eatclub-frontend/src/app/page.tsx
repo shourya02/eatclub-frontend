@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRestaurantsViewModel } from '@/viewmodels/useRestaurantsViewModel';
 import RestaurantCard from '@/components/RestaurantCard';
 import { FiUser, FiSettings, FiSearch } from 'react-icons/fi';
@@ -43,9 +44,14 @@ export default function HomePage() {
         <button className="p-2 rounded-full hover:bg-gray-100" aria-label="profile">
           <FiUser className="text-xl text-gray-600" />
         </button>
-        <div className="flex items-center text-xl font-bold text-red-600">
-          <FaUtensils className="mr-2" />
-          EatClub
+        <div className="flex items-center">
+          <Image 
+            src="/logo.png" 
+            alt="EatClub Logo" 
+            width={190} 
+            height={100}
+            className="h-8 w-auto"
+          />
         </div>
         <button className="p-2 rounded-full hover:bg-gray-100" aria-label="filters">
           <FiSettings className="text-xl text-gray-600" />
