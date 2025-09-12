@@ -1,15 +1,15 @@
-// src/components/RestaurantCard.tsx
 'use client';
 
 import React from 'react';
 import { Restaurant } from '@/models/restaurant';
+import { BsHeart } from 'react-icons/bs';
 
 type Props = { restaurant: Restaurant; };
 
 export default function RestaurantCard({ restaurant }: Props) {
-  const topDeal = restaurant.deals?.length ? Math.max(...restaurant.deals.map(d => +d.discount || 0)) : 0;
-  const hasNewDeal = restaurant.deals?.some(d => d.lightning === 'true');
-
+  const deals = restaurant.deals || [];
+  const hasNewDeal = deals.some(d => d.lightning === 'true');
+  
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
       <div className="relative">
@@ -23,10 +23,35 @@ export default function RestaurantCard({ restaurant }: Props) {
           }}
         />
         
-        {/* Discount badge */}
-        {topDeal > 0 && (
-          <div className="absolute left-3 top-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded">
-            {topDeal}% off
+        {/* All deals badges */}
+        {deals.length > 0 && (
+          <div className="absolute left-3 top-3 flex flex-col gap-2">
+            {deals.map((deal, index) => {
+              // Check for time range in multiple possible properties
+              let timeRange = 'Anytime today';
+              
+              if (deal.start && deal.end) {
+                timeRange = `${deal.start} - ${deal.end}`;
+              } else if (deal.open && deal.close) {
+                timeRange = `${deal.open} - ${deal.close}`;
+              } else if (deal.start && deal.close) {
+                timeRange = `${deal.start} - ${deal.close}`;
+              } else if (deal.open && deal.end) {
+                timeRange = `${deal.open} - ${deal.end}`;
+              }
+
+
+
+                const dealType = deal.dineIn === 'true' ? 'Dine-in' : 'Takeaway';
+              
+              return (
+                <div key={index} className="bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded">
+                  {deal.discount}% off - {dealType}
+                  <br />
+                  <span className="font-normal">{timeRange}</span>
+                </div>
+              );
+            })}
           </div>
         )}
         
@@ -46,28 +71,15 @@ export default function RestaurantCard({ restaurant }: Props) {
               {restaurant.distance || '0.5km Away'}, {restaurant.suburb || 'Lower East'}
             </p>
             <p className="text-sm text-gray-600 mt-2">
-              {(restaurant.cuisines || ['Australian']).join(' • ')}
+              {(restaurant.cuisines || ['Italian', 'Pizza']).join(', ')}
             </p>
           </div>
           <div className="ml-2 self-start">
-            <button className="p-2 rounded-full text-gray-400 hover:text-red-500" aria-label="favourite">♡</button>
+            <button className="p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors" aria-label="favourite">
+              <BsHeart className="text-2xl" />
+            </button>
           </div>
         </div>
-
-        {/* Deal information */}
-        {restaurant.deals.length > 0 && (
-          <div className="mt-3 pt-3 border-t border-gray-100">
-            {restaurant.deals.slice(0, 1).map(deal => (
-              <div key={deal.objectId} className="flex items-center">
-                <span className="text-red-600 font-semibold text-sm">{deal.discount}% off</span>
-                <span className="text-gray-500 text-sm mx-2">•</span>
-                <span className="text-gray-500 text-sm">
-                  {deal.start && deal.end ? `${deal.start} - ${deal.end}` : 'Anytime today'}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Service tags */}
         <div className="mt-3 flex flex-wrap gap-2 text-xs text-gray-600">

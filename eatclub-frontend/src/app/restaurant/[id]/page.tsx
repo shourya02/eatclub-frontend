@@ -80,7 +80,7 @@ export default function RestaurantDetailPage() {
         </p>
         
         <p className="text-gray-500">
-          {restaurant.distance || '0.5km Away'}, {restaurant.suburb || 'Lower East'}
+          {restaurant.distance || '0.5 km away'}, {restaurant.suburb || 'Lower East'}
         </p>
         
         {/* Action buttons */}
