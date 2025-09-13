@@ -1,4 +1,3 @@
-// jest.config.js
 const nextJest = require('next/jest');
 
 const createJestConfig = nextJest({
@@ -7,14 +6,20 @@ const createJestConfig = nextJest({
 
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jsdom',
   moduleNameMapping: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  testEnvironment: 'jsdom',
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
-    '!src/app/api/route.ts',
+  ],
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
+  },
+  transformIgnorePatterns: [
+    '/node_modules/',
+    '^.+\\.module\\.(css|sass|scss)$',
   ],
 };
 
