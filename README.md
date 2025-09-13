@@ -6,7 +6,7 @@ For testing, I used **Jest** and **React Testing Library**.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Clone the repository and install dependencies:
 
@@ -26,7 +26,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📱 Features Implemented
+## Features Implemented
 
 ### Restaurant List Screen
 - Fetches restaurant data from:  
@@ -46,7 +46,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🛠️ Technical Notes & Decisions
+## Technical Notes & Decisions
 
 ### MVVM Architecture
 - `models/` → DTOs for Restaurants and Deals  
@@ -63,7 +63,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🐛 Challenges & Fixes
+## Challenges & Fixes
 
 ### Broken Image Links
 - Restaurants like **Masala Kitchen**, **Ozzy Thai Café Bar**, and **Vrindavan** had invalid image URLs.
@@ -83,7 +83,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🎨 Bonus Features
+## Bonus Features
 
 - Fully responsive design — mobile-first, adapts to desktop.  
 - Sorting logic applied consistently (best deals first, highest discount on detail screen). 
@@ -92,7 +92,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ![alt text](image.png)
 
@@ -101,13 +101,14 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 ![alt text](image-2.png)
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
-eatclub-frontend/
+eatclub-frontend/src
 ├── app/
 │   ├── page.tsx                 # Restaurant List
 │   └── restaurant/[id]/page.tsx # Restaurant Detail
+│   └── api/route.ts
 ├── components/
 │   ├── RestaurantCard.tsx
 │   └── DealCard.tsx
@@ -115,15 +116,16 @@ eatclub-frontend/
 │   └── restaurant.ts
 ├── viewmodels/
 │   └── useRestaurantsViewModel.ts
-├── public/
-│   └── logo.png
 └── __tests__/
-    └── RestaurantFlow.test.tsx
+    └── components/DealCard.test.tsx
+    └── components/RestaurantCard.test.tsx         
+    └── integration/RestaurantFlow.test.tsx
+    └── viewmodels/useRestaurantViewModel.test.tsx    
 ```
 
 ---
 
-## 📝 Next Steps (if I had more time)
+## Next Steps (if I had more time)
 
 - Add comprehensive string localization for multi-language support
 - Create a global CSS theme system with design tokens for consistent styling
