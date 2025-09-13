@@ -12,13 +12,13 @@ export default function DealCard({ deal }: Props) {
   let timeRange = 'Anytime today';
   
   if (deal.start && deal.end) {
-    timeRange = `${deal.start} - ${deal.end}`;
+    timeRange = `Arrive Between ${deal.start} - ${deal.end}`;
   } else if (deal.open && deal.close) {
-    timeRange = `${deal.open} - ${deal.close}`;
+    timeRange = `Arrive Between ${deal.open} - ${deal.close}`;
   } else if (deal.start && deal.close) {
-    timeRange = `${deal.start} - ${deal.close}`;
+    timeRange = `Arrive Between ${deal.start} - ${deal.close}`;
   } else if (deal.open && deal.end) {
-    timeRange = `${deal.open} - ${deal.end}`;
+    timeRange = `Arrive Between ${deal.open} - ${deal.end}`;
   }
 
   const dealType = deal.dineIn === 'true' ? 'Dine In' : 'Takeaway';
@@ -32,17 +32,17 @@ export default function DealCard({ deal }: Props) {
             {isLightningDeal ? (
               <div className="flex items-center">
                 <BsLightningChargeFill className="text-yellow-500 mr-1" />
-                <span className="text-[#ed4c2e] font-bold text-lg">{deal.discount}% Off</span>
+                <span className="text-[#ed4c2e] font-bold text-lg">{deal.discount}% Off - {dealType}</span>
               </div>
             ) : (
-              <span className="text-[#ed4c2e] font-bold text-lg">{deal.discount}% Off</span>
+              <span className="text-[#ed4c2e] font-bold text-lg">{deal.discount}% Off - {dealType}</span>
             )}
           </div>
           <p className="text-gray-600 text-sm mt-1">
-            {dealType} • {timeRange}
+             {timeRange}
           </p>
           <p className="text-gray-400 text-xs mt-1">
-            Qty left: {deal.qtyLeft || '5'} Deals Left
+            {deal.qtyLeft || '5'} Deals Left
           </p>
         </div>
         <button className="text-white px-4 py-2 rounded-lg text-sm font-medium" style={{ backgroundColor: '#ed4c2e' }}>

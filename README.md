@@ -11,7 +11,7 @@ For testing, I used **Jest** and **React Testing Library**.
 Clone the repository and install dependencies:
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/shourya02/eatclub-frontend.git>
 cd eatclub-frontend
 npm install
 ```
@@ -88,7 +88,6 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 - Fully responsive design — mobile-first, adapts to desktop.  
 - Sorting logic applied consistently (best deals first, highest discount on detail screen). 
 - Lightning Deal Indicator: Highlighted specific deals with a time range.
-- Custom placeholder EatClub logo (no rights to official one). 
 
 ---
 
